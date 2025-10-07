@@ -7,6 +7,13 @@ Un générateur de grilles CSS interactif avec alignement pixel-perfect et expor
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![Vite](https://img.shields.io/badge/Vite-5.x-purple)
 
+## 📸 Aperçu
+
+<div align="center">
+  <img src="exemple.png" alt="Interface CSS Grid Builder" width="900"/>
+  <p><em>Interface complète avec sidebar de configuration, prévisualisation de grille et export de code</em></p>
+</div>
+
 ## 🎯 Fonctionnalités
 
 - **Interface drag & drop** intuitive pour créer des layouts CSS Grid
