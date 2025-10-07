@@ -129,41 +129,6 @@ export function SidebarControls() {
             
             <div className="flex gap-2">
               <Input
-                label="Padding"
-                type="number"
-                min={0}
-                max={100}
-                step={config.paddingUnit === 'rem' ? 0.25 : 1}
-                value={config.padding}
-                onChange={(e) => setConfig({ padding: parseFloat(e.target.value) || 0 })}
-                className="flex-1"
-              />
-              <Select
-                label="Unité"
-                value={config.paddingUnit}
-                onChange={(e) => {
-                  const newUnit = e.target.value as 'px' | 'rem';
-                  const oldUnit = config.paddingUnit;
-                  let newPadding = config.padding;
-                  
-                  // Conversion automatique
-                  if (oldUnit === 'px' && newUnit === 'rem') {
-                    newPadding = config.padding / 16; // px → rem
-                  } else if (oldUnit === 'rem' && newUnit === 'px') {
-                    newPadding = config.padding * 16; // rem → px
-                  }
-                  
-                  setConfig({ paddingUnit: newUnit, padding: Math.round(newPadding * 100) / 100 });
-                }}
-                className="w-20"
-              >
-                <option value="px">px</option>
-                <option value="rem">rem</option>
-              </Select>
-            </div>
-            
-            <div className="flex gap-2">
-              <Input
                 label="Largeur"
                 type="number"
                 min={1}

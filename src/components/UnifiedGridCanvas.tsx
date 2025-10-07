@@ -273,40 +273,22 @@ export function UnifiedGridCanvas() {
 
   const padding = `${unifiedConfig.padding}px`;
 
-  // Ajouter un item de test si aucun item n'existe
-  const addTestItem = () => {
-    const { addItem } = useGridStore.getState();
-    addItem({
-      name: 'Test Item',
-      startCol: 2,
-      endCol: 6,
-      startRow: 2,
-      endRow: 4,
-    });
-  };
-
   return (
     <div className="flex-1 flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-900 overflow-auto">
-      {items.length === 0 && (
-        <div className="absolute top-4 left-4 z-50">
-          <button
-            onClick={addTestItem}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Ajouter un item de test
-          </button>
-        </div>
-      )}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col">
         {/* HEADER : Inputs colonnes */}
         <div className="flex">
           <div style={{ width: '60px' }} />
           <div
-            className="bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-t-lg"
+            className="bg-slate-100 dark:bg-slate-800 border-x-2 border-t-2 border-slate-200 dark:border-slate-700"
             style={{
               width: `${unifiedConfig.containerWidth}px`,
               boxSizing: 'border-box',
               padding: `${unifiedConfig.padding}px`,
+              borderTopLeftRadius: '8px',
+              borderTopRightRadius: '8px',
+              borderBottomLeftRadius: '0px',
+              borderBottomRightRadius: '0px',
             }}
           >
             <div style={{ 
@@ -341,15 +323,19 @@ export function UnifiedGridCanvas() {
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex">
           {/* SIDEBAR : Inputs lignes */}
           <div
-            className="bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-l-lg"
+            className="bg-slate-100 dark:bg-slate-800 border-y-2 border-l-2 border-slate-200 dark:border-slate-700"
             style={{
               width: '60px',
               height: `${unifiedConfig.containerHeight}px`,
               boxSizing: 'border-box',
-              padding: `${unifiedConfig.padding}px`,
+              padding: '8px',
+              borderTopLeftRadius: '8px',
+              borderTopRightRadius: '0px',
+              borderBottomLeftRadius: '8px',
+              borderBottomRightRadius: '0px',
             }}
           >
             <div style={{ 
@@ -374,7 +360,7 @@ export function UnifiedGridCanvas() {
                       onKeyDown={(e) => {
                         if (e.key === 'Escape' || e.key === 'Enter') e.currentTarget.blur();
                       }}
-                      className="w-10 h-full px-1 text-xs text-center font-medium border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-10 h-full px-2 text-xs text-center font-medium border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
@@ -385,7 +371,7 @@ export function UnifiedGridCanvas() {
           {/* SURFACE : Grid unifié */}
           <div
             ref={containerRef}
-            className="relative bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-lg overflow-hidden"
+            className="relative bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden"
             style={{
               width: `${unifiedConfig.containerWidth}px`,
               height: `${unifiedConfig.containerHeight}px`,
@@ -395,6 +381,10 @@ export function UnifiedGridCanvas() {
               gridTemplateRows: tracks.cellHeights.map(height => `${Math.round(height)}px`).join(' '),
               gap: 0, // Pas de gap CSS, on utilise des margins sur les items
               padding,
+              borderTopLeftRadius: '0px',
+              borderTopRightRadius: '0px',
+              borderBottomLeftRadius: '0px',
+              borderBottomRightRadius: '8px',
             }}
             onClick={() => selectItem(null)}
           >

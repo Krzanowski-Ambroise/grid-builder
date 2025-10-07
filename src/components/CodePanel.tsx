@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useGridStore } from '@/store/gridStore';
 import { Button } from './ui/Button';
 import { Copy, Download, Check } from 'lucide-react';
-import { generateUnifiedHTML, generateUnifiedCSS, generateUnifiedTailwindClasses, generateUnifiedFullHTMLFile } from '@/lib/unifiedCodeGenerator';
+import { generateHTML, generateCSS, generateTailwind, generateFullHTML } from '@/lib/unifiedCodeGenerator';
 import { copyToClipboard, downloadFile } from '@/lib/utils';
 import { useToast } from './ui/Toast';
 
@@ -15,11 +15,11 @@ export function CodePanel() {
   const getCode = () => {
     switch (codeType) {
       case 'html':
-        return generateUnifiedHTML(items, true);
+        return generateHTML(items);
       case 'css':
-        return generateUnifiedCSS(config, items);
+        return generateCSS(config, items);
       case 'tailwind':
-        return generateUnifiedTailwindClasses(config, items);
+        return generateTailwind(config, items);
       default:
         return '';
     }
@@ -37,13 +37,13 @@ export function CodePanel() {
   };
 
   const handleExportHTML = () => {
-    const fullHTML = generateUnifiedFullHTMLFile(config, items);
+    const fullHTML = generateFullHTML(config, items);
     downloadFile(fullHTML, 'grid-layout.html', 'text/html');
     showToast('Fichier HTML exporté !', 'success');
   };
 
   const handleExportCSS = () => {
-    const css = generateUnifiedCSS(config, items);
+    const css = generateCSS(config, items);
     downloadFile(css, 'grid-layout.css', 'text/css');
     showToast('Fichier CSS exporté !', 'success');
   };
